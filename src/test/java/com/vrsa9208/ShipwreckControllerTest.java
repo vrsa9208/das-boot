@@ -1,5 +1,7 @@
 package com.vrsa9208;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -41,7 +43,8 @@ public class ShipwreckControllerTest {
 		Shipwreck wreck = sc.get(1L);
 		
 		verify(shipwreckRepository).findById(1L);
-		assertEquals(1L, wreck.getId().longValue());
+		//assertEquals(1L, wreck.getId().longValue());
+		assertThat(wreck.getId()).isEqualTo(1L);
 	}
 	
 	@Test
@@ -52,6 +55,8 @@ public class ShipwreckControllerTest {
 		
 		when(shipwreckRepository.findAll()).thenReturn(shipwrecks);
 		
-		assertEquals(2, sc.list().size());
+		//assertEquals(2, sc.list().size());
+		assertThat(sc.list().size()).isGreaterThan(0);
+		assertThat(sc.list().size()).isEqualTo(2);
 	}
 }
